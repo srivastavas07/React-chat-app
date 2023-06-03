@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { auth, db } from '../firebase';
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 import SendMessage from './sendMessage';
 
 function Chat() {
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef();
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(scrollToBottom, [messages]);
+
 
   useEffect(() => {
     const q = query(collection(db, 'message'), orderBy('createAt'), limit(50));
@@ -21,8 +31,8 @@ function Chat() {
 
   const CurrentUser = auth.currentUser
   return (
-    <div className="bg-transparent pb-44 pt-20 containerWrap px-5">
-      <div className="navbar pt-3 pb-3  flex justify-around fixed top-0 left-0 bg-gray-600">
+    <div className="bg-transparent pb-24 pt-20 containerWrap ">
+      <div className="navbar pt-3 pb-3  z-10 flex justify-around fixed top-0 left-0 bg-gray-600">
         <p className="btn btn-ghost normal-case text-xl text-white">kChat07</p>
         <button className="btn btn-black text-white" onClick={() => auth.signOut()}>Sign Out</button>
       </div>
@@ -40,6 +50,7 @@ function Chat() {
             </div>
             <div className={`chat-bubble mb-1 text-white ${uid === CurrentUser.uid ? "bg-blue-500" : "bg-gray-600"}`}>{text}</div>
             <time className="text-xs opacity-50"></time>
+            <div className= "" ref={messagesEndRef}></div>
             {/* <div className="chat-footer opacity-50">
               Delivered
             </div> */}
