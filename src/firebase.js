@@ -5,12 +5,12 @@ import {getFirestore} from "firebase/firestore";
 import {GoogleAuthProvider, getAuth} from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBnHu3WWAUfWsYoYPE-K8122td9i7HjMVI",
+  apiKey: "Api_key", //Enter your Api key here..
   authDomain: "kunalchat07-a6309.firebaseapp.com",
-  projectId: "kunalchat07-a6309",
+  projectId: "Project_id", //Enter project id here..
   storageBucket: "kunalchat07-a6309.appspot.com",
   messagingSenderId: "473378893096",
-  appId: "1:473378893096:web:813199d094f5baa126b41d",
+  appId: "App_id", //Enter your app id here..
   measurementId: "G-CX80JC0KCC"
 };
 
